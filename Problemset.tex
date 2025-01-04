@@ -6,6 +6,7 @@
 \usepackage{algorithmic}
 \usepackage{hyperref}
 \usepackage{graphicx} % Required for inserting images
+\usepackage{multicol}
 
 % ChatGPT wrote 80% of this environment.
 \makeatletter
@@ -29,6 +30,8 @@
   \def\@problemexplain{}
 }
 {%
+  \setlength\parindent{0pt}
+  
   \section*{\@problemtitle}
 
   \subsection*{Description}
@@ -41,11 +44,17 @@
   \@problemoutput
 
   \subsection*{Sample Testcases}
-  \textbf{Input:} \\
-  \@problemsamplein
+  \begin{multicols}{2}
+    \textbf{Sample Input:}
 
-  \textbf{Output:} \\
-  \@problemsampleout
+    \texttt{\@problemsamplein}
+    
+    \columnbreak
+    
+    \textbf{Sample Output:}
+
+    \texttt{\@problemsampleout}
+  \end{multicols}
 
   \subsection*{Explanation}
   \@problemexplain
