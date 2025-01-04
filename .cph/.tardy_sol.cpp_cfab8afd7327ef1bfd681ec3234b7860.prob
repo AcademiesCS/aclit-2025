@@ -1,0 +1,1 @@
+{"name":"Local: tardy_sol","url":"/home/taha/cp-files/acl-hspc2025/tardy_sol.cpp","tests":[{"id":1735279026751,"input":"5 \n2 2 6 5\n","output":"NO"},{"id":1735279035031,"input":"5 \n2 6 6 5\n","output":"YES"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/taha/cp-files/acl-hspc2025/tardy_sol.cpp","group":"local","local":true}
