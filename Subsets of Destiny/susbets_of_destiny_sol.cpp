@@ -14,7 +14,7 @@ typedef long long ll;
 
 void solve(int num_tc)
 {
-    ll N; cin >> N;
+    ll N, X, Y; cin >> N >> X >> Y;
     vector<ll> h1(N/2), h2(N/2);
  
     for(ll i = 0; i < h1.size(); i++) cin >> h1[i];
@@ -44,7 +44,9 @@ void solve(int num_tc)
         }
 
         auto possibleSet = first[{100 - sum, xorVal}];
-        ans += ;
+        int low = X - __builtin_popcount(mask);
+        int high = Y - __builtin_popcount(mask);
+        ans += possibleSet.order_of_key(high) - possibleSet.order_of_key(low);
     }
  
     cout << ans << endll;
@@ -52,7 +54,6 @@ void solve(int num_tc)
 
 int32_t main()
 {
-    freopen("bunches_data.txt", "r", stdin);
     ios::sync_with_stdio(false);
     cin.tie(0); cout.tie(0);  
 
