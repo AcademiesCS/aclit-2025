@@ -12,9 +12,9 @@ tree_order_statistics_node_update> indexed_set;
 typedef long long ll;
 #define endll '\n'
 
-void solve(int num_tc)
+void solveEfficient(int num_tc)
 {
-    ll N, X, Y; cin >> N >> X >> Y;
+    ll N, S, X, Y; cin >> N >> S >> X >> Y;
     vector<ll> h1(N/2), h2(N/2);
  
     for(ll i = 0; i < h1.size(); i++) cin >> h1[i];
@@ -43,7 +43,7 @@ void solve(int num_tc)
             xorVal ^= h2[i];
         }
 
-        auto possibleSet = first[{100 - sum, xorVal}];
+        auto possibleSet = first[{S - sum, xorVal}];
         int low = X - __builtin_popcount(mask);
         int high = Y - __builtin_popcount(mask);
         ans += possibleSet.order_of_key(high) - possibleSet.order_of_key(low);
@@ -52,10 +52,37 @@ void solve(int num_tc)
     cout << ans << endll;
 }
 
+void solveBrute(int num_tc)
+{
+    ll N, S, X, Y; cin >> N >> S >> X >> Y;
+    vector<ll> arr(N);
+
+    for(ll i = 0; i < N; i++) cin >> arr[i];
+ 
+
+    ll ans = 0;
+    for(ll mask = 0; mask < (1LL << N); mask++)
+    {
+        ll sum = 0, xorVal = 0;
+        for(ll i = 0; i < arr.size(); i++) if(mask & (1LL << i))
+        {
+            sum += arr[i];
+            xorVal ^= arr[i];
+        }
+
+        int num = __builtin_popcount(mask);
+        if(sum == S && xorVal == 0 && num >= X && num <= Y)
+        {
+            ans++;
+        }
+    }
+
+    cout << ans << endll;
+}
+
+
 int32_t main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(0); cout.tie(0);  
-
-    solve(0);
+    //solveEfficient(0);
+    solveBrute(0);
 }
