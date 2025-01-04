@@ -6,307 +6,65 @@
 \usepackage{hyperref}
 \usepackage{graphicx} % Required for inserting images
 
+% ChatGPT wrote 80% of this environment.
+\makeatletter
+\newenvironment{problem}
+{%
+  % Define the custom commands for this environment
+  \newcommand{\problemtitle}[1]{\def\@problemtitle{##1}}
+  \newcommand{\problemdesc}[1]{\def\@problemdesc{##1}}
+  \newcommand{\probleminput}[1]{\def\@probleminput{##1}}
+  \newcommand{\problemoutput}[1]{\def\@problemoutput{##1}}
+  \newcommand{\problemsamplein}[1]{\def\@problemsamplein{##1}}
+  \newcommand{\problemsampleout}[1]{\def\@problemsampleout{##1}}
+  \newcommand{\problemexplain}[1]{\def\@problemexplain{##1}}
+  % Set default definitions
+  \def\@problemtitle{}
+  \def\@problemdesc{}
+  \def\@probleminput{}
+  \def\@problemoutput{}
+  \def\@problemsamplein{}
+  \def\@problemsampleout{}
+  \def\@problemexplain{}
+}
+{%
+  \section*{\@problemtitle}
+
+  \subsection*{Description}
+  \@problemdesc
+
+  \subsection*{Input}
+  \@probleminput
+
+  \subsection*{Output}
+  \@problemoutput
+
+  \subsection*{Sample Testcases}
+  \textbf{Input:} \\
+  \@problemsamplein
+
+  \textbf{Output:} \\
+  \@problemsampleout
+
+  \subsection*{Explanation}
+  \@problemexplain
+}
+\makeatother
+
 \title{ACL-IT Problemset 2025}
 
 \begin{document}
 
 \maketitle
 
-\section*{Problem 1: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
-
-\newpage
-
-\section*{Problem 2: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
-
-\newpage
-
-\section*{Problem 3: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
-
-\newpage
-
-\section*{Problem 4: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
-
-\newpage
-
-\section*{Problem 5: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
-
-\newpage
-
-\section*{Problem 6: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
-
-\newpage
-
-\section*{Problem 7: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
-
-\newpage
-
-\section*{Problem 8: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
-
-\newpage
-
-\section*{Problem 9: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
-
-\newpage
-
-\section*{Problem 10: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
-
-\newpage
-
-\section*{Problem 11: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
-
-\newpage
-
-\section*{Problem 12: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
-
-\newpage
-
-\section*{Problem 13: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
+\begin{problem}
+  \problemtitle{Title of the Problem}
+  \problemdesc{Write the description for the problem here.}
+  \probleminput{Describe the input format here.}
+  \problemoutput{Describe the output format here.}
+  \problemsamplein{Sample input goes here.}
+  \problemsampleout{Sample output goes here.}
+  \problemexplain{Explain the sample test cases here.}
+\end{problem}
 
 \end{document}
