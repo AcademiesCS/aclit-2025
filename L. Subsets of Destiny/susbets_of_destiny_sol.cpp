@@ -6,8 +6,6 @@
 using namespace __gnu_pbds;
 using namespace std;
 
-typedef tree<int,null_type,less_equal<int>,rb_tree_tag,
-tree_order_statistics_node_update> indexed_set;
 
 typedef long long ll;
 #define endll '\n'
@@ -15,12 +13,12 @@ typedef long long ll;
 void solveEfficient(int num_tc)
 {
     ll N, S, X, Y; cin >> N >> S >> X >> Y;
-    vector<ll> h1(N/2), h2(N/2);
+    vector<ll> h1(N/2), h2(N/2 + N%2);
  
     for(ll i = 0; i < h1.size(); i++) cin >> h1[i];
     for(ll i = 0; i < h2.size(); i++) cin >> h2[i];
  
-    map<pair<int, int>, indexed_set> first{};
+    map<pair<int, int>, vector<int>> first{};
  
     for(ll mask = 0; mask < (1 << h1.size()); mask++)
     {
@@ -30,8 +28,11 @@ void solveEfficient(int num_tc)
             sum += h1[i];
             xorVal ^= h1[i];
         }
-        first[{sum, xorVal}].insert(__builtin_popcount(mask));
+        
+        first[{sum, xorVal}].push_back(__builtin_popcount(mask));
     }
+
+    for(auto &entry : first) sort(entry.second.begin(), entry.second.end());
  
     ll ans = 0;
     for(ll mask = 0; mask < (1 << h2.size()); mask++)
@@ -46,7 +47,9 @@ void solveEfficient(int num_tc)
         auto possibleSet = first[{S - sum, xorVal}];
         int low = X - __builtin_popcount(mask);
         int high = Y - __builtin_popcount(mask);
-        ans += possibleSet.order_of_key(high) - possibleSet.order_of_key(low);
+        ans += 
+            upper_bound(possibleSet.begin(), possibleSet.end(), high) - 
+            lower_bound(possibleSet.begin(), possibleSet.end(), low);
     }
  
     cout << ans << endll;
@@ -83,6 +86,5 @@ void solveBrute(int num_tc)
 
 int32_t main()
 {
-    //solveEfficient(0);
-    solveBrute(0);
+    solveEfficient(0);
 }
