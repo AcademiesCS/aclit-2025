@@ -63,6 +63,8 @@
 }
 \makeatother
 
+\frenchspacing
+
 \begin{document}
 \begin{titlepage}
   \vspace*{\stretch{1}}
@@ -79,12 +81,28 @@
 \end{titlepage}
 
 \begin{problem}
-  \problemtitle{Title of the Problem}
-  \problemdesc{Write the description for the problem here.}
-  \probleminput{Describe the input format here.}
-  \problemoutput{Describe the output format here.}
-  \problemsamplein{Sample input goes here.}
-  \problemsampleout{Sample output goes here.}
+  \problemtitle{First Day}
+  \problemdesc{
+    First day of school! Mr. Markley has everyone introduce themselves. Help
+    Ralph introduce himself by saying ``Hello I’m Ralph!'' to others around him.
+  }
+  \probleminput{
+    You will be given a single newline-terminated string. The length of the
+    string will not exceed 100 characters (including the newline).
+  }
+  \problemoutput{
+    Print out exactly ``Hello [\emph{input}] I'm Ralph!'', terminated by a newline.
+  }
+  \problemsamplein{%
+    Dr. Priddy
+
+    Ralph
+  }
+  \problemsampleout{%
+    Hello Dr. Priddy I'm Ralph!
+
+    Hello Ralph I'm Ralph!
+  }
   \problemexplain{Explain the sample test cases here.}
 \end{problem}
 
