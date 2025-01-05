@@ -1,312 +1,165 @@
 \documentclass[12pt]{article}
+\usepackage[letterpaper,margin=1in]{geometry}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage{hyperref}
+\usepackage{parskip}
 \usepackage{graphicx} % Required for inserting images
+\usepackage{multicol}
+\usepackage{tcolorbox}
 
-\title{ACL-IT Problemset 2025}
+\makeatletter
+% Hack to automatically put a horizontal line between each test case. Each test
+% case should be typeset as a single paragraph, one test case per paragraph.
+% Works by redefining \par to put in a horizontal rule, and resets it to its
+% original definition inside the macro (since \hrule calls \par as well).
+\newcommand{\testcase}[1]
+{
+  \let\@oldpar\par
+  \def\par{\let\par\@oldpar \vspace{1ex}\hrule\vspace{1ex}}
+  \ttfamily
+  #1
+}
+
+% ChatGPT wrote 80% of this environment.
+\newenvironment{problem}
+{%
+  % Define the custom commands for this environment
+  \newcommand{\problemtitle}[1]{\def\@problemtitle{##1}}
+  \newcommand{\problemdesc}[1]{\def\@problemdesc{##1}}
+  \newcommand{\probleminput}[1]{\def\@probleminput{##1}}
+  \newcommand{\problemoutput}[1]{\def\@problemoutput{##1}}
+  \newcommand{\problemsamplein}[1]{\def\@problemsamplein{##1}}
+  \newcommand{\problemsampleout}[1]{\def\@problemsampleout{##1}}
+  \newcommand{\problemexplain}[1]{\def\@problemexplain{##1}}
+  % Set default definitions
+  \def\@problemtitle{}
+  \def\@problemdesc{}
+  \def\@probleminput{}
+  \def\@problemoutput{}
+  \def\@problemsamplein{}
+  \def\@problemsampleout{}
+  \def\@problemexplain{}
+}
+{%
+  \setlength\parindent{0pt}
+  
+  \section{\@problemtitle}
+
+  {\hfill\includegraphics[height=0.2\textheight]{assets/\Alph{section}.png}\hfill}
+
+  \subsection*{Description}
+  \@problemdesc
+
+  \subsection*{Input}
+  \@probleminput
+
+  \subsection*{Output}
+  \@problemoutput
+
+  \subsection*{Sample Testcases}
+  \begin{multicols}{2}
+    \textbf{Sample Input:}
+
+    \begin{tcolorbox}
+      \testcase{\@problemsamplein}
+    \end{tcolorbox}
+    
+    \columnbreak
+    
+    \textbf{Sample Output:}
+
+    \begin{tcolorbox}
+      \testcase{\@problemsampleout}
+    \end{tcolorbox}
+  \end{multicols}
+
+  \subsection*{Explanation}
+  \@problemexplain
+  
+  \clearpage
+}
+\makeatother
+
+\frenchspacing
+
+\renewcommand\thesection{Problem \Alph{section}:}
 
 \begin{document}
-
-\maketitle
-
-\section*{Problem 1: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
-
-\newpage
-
-\section*{Problem 2: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
-
-\newpage
-
-\section*{Problem 3: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
-
-\newpage
-
-\section*{Problem 4: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
-
-\newpage
-
-\section*{Problem 5: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
-
-\newpage
-
-\section*{Problem 6: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
-
-\newpage
-
-\section*{Problem 7: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
-
-\newpage
-
-\section*{Problem 8: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
-
-\newpage
-
-\section*{Problem 9: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
-
-\newpage
-
-\section*{Problem 10: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
-
-\newpage
-
-\section*{Problem 11: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
-
-\newpage
-
-\section*{Problem 12: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
-
-\newpage
-
-\section*{Problem 13: Title of the Problem}
-
-\subsection*{Introduction}
-Write the introduction for the problem here.
-
-\subsection*{Input}
-Describe the input format here.
-
-\subsection*{Output}
-Describe the output format here.
-
-\subsection*{Sample Testcases}
-\textbf{Input:} \\
-Input goes here.
-
-\textbf{Output:} \\
-Output goes here.
-
-\subsection*{Explanation}
-Explain the sample test cases here.
+\begin{titlepage}
+  \vspace*{\stretch{1}}
+  \setlength\parskip{0.2cm}
+  \centering
+  
+  \includegraphics[width=0.8\textwidth]{./assets/acl.png}
+  
+  {\Huge ACL-IT 2025 Problemset}
+  
+  {\Large March 23, 2025}
+
+  Hosted by ACL Competitive Programming Team
+  
+  \vspace*{\stretch{2}}
+\end{titlepage}
+
+\begin{problem}
+  \problemtitle{First Day}
+  \problemdesc{
+    First day of school! Mr. Markley has everyone introduce themselves. Help
+    Ralph introduce himself by saying ``Hello I’m Ralph!'' to others around him.
+  }
+  \probleminput{
+    You will be given a single newline-terminated string. The length of the
+    string will not exceed 100 characters (including the newline).
+  }
+  \problemoutput{
+    Print out exactly ``Hello [\emph{input}] I'm Ralph!'', terminated by a newline.
+  }
+  \problemsamplein{%
+    Dr. Priddy
+    
+    Ralph
+  }
+  \problemsampleout{%
+    Hello Dr. Priddy I'm Ralph!
+
+    Hello Ralph I'm Ralph!
+  }
+  \problemexplain{Explain the sample test cases here.}
+\end{problem}
+
+\begin{problem}
+  \problemtitle{Tardy}
+  \problemdesc{
+    Uh oh! Ralph woke up late and is now late for class. Ralph doesn’t want to
+    get detention. Ralph goes to detention if he is tardy more than the tardy limit
+    for 2 or more quarters.
+
+    Each quarter Ralph can be late no more than \(k\) times. Given that Ralph is
+    late for school \(q_i\) times each quarter, help determine whether Ralph will go to
+    detention.
+  }
+  \probleminput{
+    You will be given \(k\) on the first line, and \(q_1\), \(q_2\), \(q_3\), \(q_4\) (\(1 <= q_1, q_2, q_3, q_4, k <= 45\)) on the second line.
+  }
+  \problemoutput{
+    Print out either ``YES'' or ``NO'' based on whether Ralph is going to detention.
+  }
+  \problemsamplein{%
+    5 \\
+    2 2 6 5
+
+    3 \\
+    2 2 6 5
+  }
+  \problemsampleout{%
+    NO
+
+    YES
+  }
+  \problemexplain{Explain the sample test cases here.}
+\end{problem}
 
 \end{document}
