@@ -11,6 +11,7 @@ with pkgs;
           algorithms
           float
           etoolbox
+          tcolorbox
         ]))
     ];
   }
