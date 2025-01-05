@@ -1,1 +1,0 @@
-{"name":"Local: senior_research","url":"/home/taha/cp-files/acl-hspc2025/senior_research.cpp","tests":[{"id":1735274315920,"input":"6\n2 2\n3 3\n4 4\n5 6\n8 11\n3 60","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/taha/cp-files/acl-hspc2025/senior_research.cpp","group":"local","local":true}
