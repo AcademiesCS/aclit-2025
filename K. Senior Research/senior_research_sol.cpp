@@ -6,30 +6,28 @@ using namespace std;
 
 #define endll '\n'
 
-long long SumOfDivisors(long long num, vector<long long> &primes) {
+long long SumOfDivisors(long long num, vector<long long>& primes) {
     long long total = 1;
 
-    for (long long i = 0; primes[i] * primes[i] <= num && i < primes.size(); i++) {
-        if (num % primes[i] == 0) {
+    for (int i = 2; (long long)i * i <= num; i++) {
+        if (num % i == 0) {
             int e = 0;
             do {
                 e++;
-                num /= primes[i];
-            } while (num % primes[i] == 0);
+                num /= i;
+            } while (num % i == 0);
 
             long long sum = 0, pow = 1;
             do {
                 sum += pow;
-                pow *= primes[i];
+                pow *= i;
             } while (e-- > 0);
             total *= sum;
         }
     }
-
     if (num > 1) {
         total *= (1 + num);
     }
-
     return total;
 }
 
@@ -55,7 +53,7 @@ long long binExp(long long a, long long b, long long mod) {
         return (res * res) % mod;
 }
 
-int main()
+void solveEfficient()
 {
     ios::sync_with_stdio(false);
     cin.tie(0); cout.tie(0);
@@ -85,4 +83,35 @@ int main()
         long long l, r; cin >> l >> r;
         cout << prefixes[r - 1] * binExp(prefixes[l - 2], MOD - 2, MOD) % MOD << endll;
     }
+}
+
+void solveBrute()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0); cout.tie(0);
+
+    long long T; cin >> T;
+    for(int t = 0; t < T; t++)
+    {
+        long long l, r; cin >> l >> r;
+        long long ans = 1;
+        for(int j = l; j <= r; j++)
+        {
+            long long cur = 0;
+            for(int d = 1; d <= j; d++)
+            {
+                if(j % d == 0) cur += d;
+            }
+            ans *= cur;
+            ans %= (long long)(1e9+7);
+        }
+
+        cout << ans << endll;
+    }
+}
+
+int main()
+{
+    //solveBrute();
+    //solveEfficient();
 }
