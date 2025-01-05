@@ -5,6 +5,7 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage{hyperref}
+\usepackage{parskip}
 \usepackage{graphicx} % Required for inserting images
 \usepackage{multicol}
 \usepackage{tcolorbox}
@@ -125,6 +126,38 @@
     Hello Dr. Priddy I'm Ralph!
 
     Hello Ralph I'm Ralph!
+  }
+  \problemexplain{Explain the sample test cases here.}
+\end{problem}
+
+\begin{problem}
+  \problemtitle{Tardy}
+  \problemdesc{
+    Uh oh! Ralph woke up late and is now late for class. Ralph doesn’t want to
+    get detention. Ralph goes to detention if he is tardy more than the tardy limit
+    for 2 or more quarters.
+
+    Each quarter Ralph can be late no more than \(k\) times. Given that Ralph is
+    late for school \(q_i\) times each quarter, help determine whether Ralph will go to
+    detention.
+  }
+  \probleminput{
+    You will be given \(k\) on the first line, and \(q_1\), \(q_2\), \(q_3\), \(q_4\) (\(1 <= q_1, q_2, q_3, q_4, k <= 45\)) on the second line.
+  }
+  \problemoutput{
+    Print out either ``YES'' or ``NO'' based on whether Ralph is going to detention.
+  }
+  \problemsamplein{%
+    5 \\
+    2 2 6 5
+
+    3 \\
+    2 2 6 5
+  }
+  \problemsampleout{%
+    NO
+
+    YES
   }
   \problemexplain{Explain the sample test cases here.}
 \end{problem}

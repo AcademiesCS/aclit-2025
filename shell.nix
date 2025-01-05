@@ -8,6 +8,7 @@ with pkgs;
           latexmk
           amsmath
           amsfonts
+          parskip
           algorithms
           float
           etoolbox
