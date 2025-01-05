@@ -91,6 +91,7 @@ int32_t main()
         FILE* f = freopen((string("maxtest") + to_string(j) + string(".in")).c_str(), "w", stdout);
 
         int T = 1e6;
+        cout << T << endll;
         vector<pair<ll, ll>> arr{};
 
         for(int i = 1; i <= T; i++)
@@ -103,7 +104,7 @@ int32_t main()
         }
 
         f = freopen((string("maxtest") + to_string(j) + string(".out")).c_str(), "w", stdout);
-        solveEfficient( arr);
+        solveEfficient(arr);
 
         fclose(f);
     }

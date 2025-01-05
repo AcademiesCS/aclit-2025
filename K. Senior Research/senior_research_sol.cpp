@@ -113,5 +113,5 @@ void solveBrute()
 int main()
 {
     //solveBrute();
-    //solveEfficient();
+    solveEfficient();
 }
