@@ -46,7 +46,7 @@
 {%
   \setlength\parindent{0pt}
   
-  \section*{\@problemtitle}
+  \section{\@problemtitle}
 
   {\hfill\includegraphics[width=0.5\textwidth]{assets/\@problemimage}\hfill}
 
@@ -80,6 +80,8 @@
 \makeatother
 
 \frenchspacing
+
+\renewcommand\thesection{Problem \Alph{section}:}
 
 \begin{document}
 \begin{titlepage}
