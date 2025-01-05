@@ -26,7 +26,6 @@
 {%
   % Define the custom commands for this environment
   \newcommand{\problemtitle}[1]{\def\@problemtitle{##1}}
-  \newcommand{\problemimage}[1]{\def\@problemimage{##1}}
   \newcommand{\problemdesc}[1]{\def\@problemdesc{##1}}
   \newcommand{\probleminput}[1]{\def\@probleminput{##1}}
   \newcommand{\problemoutput}[1]{\def\@problemoutput{##1}}
@@ -35,7 +34,6 @@
   \newcommand{\problemexplain}[1]{\def\@problemexplain{##1}}
   % Set default definitions
   \def\@problemtitle{}
-  \def\@problemimage{}
   \def\@problemdesc{}
   \def\@probleminput{}
   \def\@problemoutput{}
@@ -48,7 +46,7 @@
   
   \section{\@problemtitle}
 
-  {\hfill\includegraphics[width=0.5\textwidth]{assets/\@problemimage}\hfill}
+  {\hfill\includegraphics[width=0.5\textwidth]{assets/\Alph{section}.png}\hfill}
 
   \subsection*{Description}
   \@problemdesc
@@ -102,7 +100,6 @@
 
 \begin{problem}
   \problemtitle{First Day}
-  \problemimage{A.png}
   \problemdesc{
     First day of school! Mr. Markley has everyone introduce themselves. Help
     Ralph introduce himself by saying ``Hello I’m Ralph!'' to others around him.
