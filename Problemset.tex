@@ -8,8 +8,20 @@
 \usepackage{graphicx} % Required for inserting images
 \usepackage{multicol}
 
-% ChatGPT wrote 80% of this environment.
 \makeatletter
+% Hack to automatically put a horizontal line between each test case. Each test
+% case should be typeset as a single paragraph, one test case per paragraph.
+% Works by redefining \par to put in a horizontal rule, and resets it to its
+% original definition inside the macro (since \hrule calls \par as well).
+\newcommand{\testcase}[1]
+{
+  \let\@oldpar\par
+  \def\par{\let\par\@oldpar \vspace{1ex}\hrule\vspace{1ex}}
+  \ttfamily
+  #1
+}
+
+% ChatGPT wrote 80% of this environment.
 \newenvironment{problem}
 {%
   % Define the custom commands for this environment
@@ -47,13 +59,13 @@
   \begin{multicols}{2}
     \textbf{Sample Input:}
 
-    \texttt{\@problemsamplein}
+    \testcase{\@problemsamplein}
     
     \columnbreak
     
     \textbf{Sample Output:}
 
-    \texttt{\@problemsampleout}
+    \testcase{\@problemsampleout}
   \end{multicols}
 
   \subsection*{Explanation}
@@ -95,7 +107,7 @@
   }
   \problemsamplein{%
     Dr. Priddy
-
+    
     Ralph
   }
   \problemsampleout{%
