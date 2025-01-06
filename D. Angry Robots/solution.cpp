@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <iomanip>
 
 using namespace std;
 
@@ -20,5 +21,5 @@ int main()
 
     double yf = -1*(g/2)*(t*t) + viy*t + y;
     double xf = vix*t + x;
-    cout << xf << ' ' << yf << endll;
+    cout << setprecision(8) << xf << ' ' << yf << endll;
 }
