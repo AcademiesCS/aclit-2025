@@ -9,18 +9,18 @@ using namespace std;
 long long SumOfDivisors(long long num, vector<long long>& primes) {
     long long total = 1;
 
-    for (int i = 2; (long long)i * i <= num; i++) {
-        if (num % i == 0) {
+    for (int i = 0; primes[i] * primes[i] <= num; i++) {
+        if (num % primes[i] == 0) {
             int e = 0;
             do {
                 e++;
-                num /= i;
-            } while (num % i == 0);
+                num /= primes[i];
+            } while (num % primes[i] == 0);
 
             long long sum = 0, pow = 1;
             do {
                 sum += pow;
-                pow *= i;
+                pow *= primes[i];
             } while (e-- > 0);
             total *= sum;
         }
@@ -34,7 +34,13 @@ long long SumOfDivisors(long long num, vector<long long>& primes) {
 void sieve(vector<bool>& is_prime, long long n)
 {
     is_prime[0] = is_prime[1] = false;
-    for (long long i = 2; i <= n; i++) {
+    long long i = 2;
+    if (is_prime[i] && i * i <= n) {
+        for (long long j = i * i; j <= n; j += i)
+            is_prime[j] = false;
+    }
+
+    for (i = 3; i <= n; i++) {
         if (is_prime[i] && i * i <= n) {
             for (long long j = i * i; j <= n; j += i)
                 is_prime[j] = false;

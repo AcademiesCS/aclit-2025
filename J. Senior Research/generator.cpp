@@ -86,7 +86,7 @@ int32_t main()
 {
     srand(time(0));
 
-    for(int j = 0; j < 5; j++)
+    for(int j = 0; j < 15; j++)
     {
         FILE* f = freopen((string("maxtest") + to_string(j) + string(".in")).c_str(), "w", stdout);
 
@@ -96,9 +96,10 @@ int32_t main()
 
         for(int i = 1; i <= T; i++)
         {
-            int l = rand()%((int)2e6-1) + 2;
             int r = rand()%((int)2e6-1) + 2;
-            r = max(r, (int)2e6-1);
+            r = min(r, (int)2e6-1);
+            int l = rand()%((int)2e6-1) + 2;
+            l = min(l, r);
             arr.push_back({l, r});
             cout << l << " " << r << endll;
         }
