@@ -1,0 +1,1 @@
+{"name":"Local: taha_sol","url":"/home/taha/cp-files/acl-hspc2025/J. Senior Research/taha_sol.cpp","tests":[{"id":1738971736992,"input":"6\n2 2\n3 3\n4 4\n5 6\n8 11\n3 60\n","output":"3\n4\n7\n72\n42120\n195601720\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/taha/cp-files/acl-hspc2025/J. Senior Research/taha_sol.cpp","group":"local","local":true}
