@@ -1,0 +1,87 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstdefinestyle{javastyle}{
+  language=Java,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{gray},
+  numbers=left,
+  numberstyle=\tiny\color{orange},
+  stepnumber=1,
+  showspaces=false,
+  showstringspaces=false,
+  tabsize=4,
+  classoffset=1,
+  morekeywords={String},
+  keywordstyle=\color{teal}
+}
+
+\lstset{style=javastyle}
+
+
+\renewcommand{\thesection}{\Alph{section}.}
+\renewcommand{\thesubsection}{\roman{subsection}}
+
+\setcounter{tocdepth}{1}
+
+\title{ACL-IT 2025 Editorial}
+\author{} % Add author if needed
+\date{2025}
+
+\graphicspath{{./}} % Ensure the image is in the same folder as .tex
+
+\begin{document}
+\maketitle
+\begin{center}
+    \vfill
+    \includegraphics[width=0.5\textwidth]{ACLITLOGOPLACEHOLDER.png}
+    \vfill
+\end{center}
+
+
+
+\newpage
+
+\tableofcontents
+
+\section*{Introduction}
+All solutions to problems will be posted to github, along with full code in java and C++. The code here is only snippets of it to illustrate the problem-solving process. There's a short solution and an in-depth one for the harder problems. Please let us know if you have questions about anything mentioned here.
+
+\section{First Day}
+\subsection{Editorial}
+The problem asks us to output a greeting given a name of someone Ralph is going to greet. The easiest way to do this is to use string concatenation. Read in the name, then print out the combined string with the rest of the greeting. Alternatively, print out sections of the greeting one by one.
+
+\begin{lstlisting}
+    String name = sc.next();
+    System.out.println("Hello " + name + " I'm Ralph!");
+    int x = 4;
+\end{lstlisting}
+
+
+\section{Tardy}
+\subsection{Editorial}
+Count the number of times Ralph is going to be late. Compare each value of $q_i$ to the value of $k$, and increment a tardy counter if Ralph will be late that quarter. Then, if the counter is greater than or equal to two, Ralph has been tardy too many times and will get detention. Alternatively, use an array and a loop to count.
+
+\begin{lstlisting}
+    int numTardy = 0;
+    if(q1 > k) numTardy++;
+    if(q2 > k) numTardy++;
+    ...
+    if(k >= 2) System.out.println("YES");
+    else System.out.println("NO");
+\end{lstlisting}
+
+\section{Laptops}
+\section{Angry Robots}
+\section{Skipping Stones}
+\section{Ralph and Brian}
+\section{Titration}
+\section{Field Day}
+\section{Navigation}
+\section{Senior Research}
+\section{Blue Ribbon}
+\end{document}
