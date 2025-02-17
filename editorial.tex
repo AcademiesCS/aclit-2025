@@ -1,0 +1,127 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstdefinestyle{javastyle}{
+  language=Java,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{gray},
+  numbers=left,
+  numberstyle=\tiny\color{orange},
+  stepnumber=1,
+  showspaces=false,
+  showstringspaces=false,
+  tabsize=4,
+  classoffset=1,
+  morekeywords={String},
+  keywordstyle=\color{teal}
+}
+
+\lstset{style=javastyle}
+
+
+\renewcommand{\thesection}{\Alph{section}.}
+\renewcommand{\thesubsection}{\roman{subsection}}
+
+\setcounter{tocdepth}{1}
+
+\title{ACL-IT 2025 Editorial}
+\author{} % Add author if needed
+\date{2025}
+
+\graphicspath{{./}} % Ensure the image is in the same folder as .tex
+
+\begin{document}
+\maketitle
+\begin{center}
+    \vfill
+    \includegraphics[width=1.0\textwidth]{logo.png}
+    \vfill
+\end{center}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section*{Introduction}
+All solutions to problems will be posted to GitHub, along with full code in Java and C++. The code here is only snippets of it to illustrate the problem-solving process. There's a short solution and an in-depth one for the harder problems. Please let us know if you have questions about anything mentioned here.
+
+\section{First Day}
+\textbf{Problem Idea: Matthew Li\\ Analysis By: Arush Bodla}
+\subsection{Editorial}
+The problem asks us to output a greeting given the name of someone Ralph is going to greet. The easiest way to do this is to use string concatenation. Read in the name, then print out the combined string with the rest of the greeting. Alternatively, print out sections of the greeting one by one.
+
+\begin{lstlisting}
+    String name = sc.next();
+    System.out.println("Hello " + name + " I'm Ralph!");
+    int x = 4;
+\end{lstlisting}
+
+
+\section{Tardy}
+\textbf{Problem Idea: Matthew Li\\ Analysis By: Arush Bodla}
+\subsection{Editorial}
+Count the number of times Ralph is going to be late. Compare each value of $q_i$ to the value of $k$, and increment a tardy counter if Ralph will be late that quarter. Then, if the counter is greater than or equal to two, Ralph has been tardy too many times and will get detention. Alternatively, use an array and a loop to count.
+
+\begin{lstlisting}
+    int numTardy = 0;
+    if(q1 > k) numTardy++;
+    if(q2 > k) numTardy++;
+    ...
+    if(k >= 2) System.out.println("YES");
+    else System.out.println("NO");
+\end{lstlisting}
+
+\section{Laptops}
+\textbf{Problem Idea: Taha Rawjani\\ Analysis By: Taha Rawjani}
+\subsection{Editorial}
+Read the list of banned software into a list (or ArrayList/std::vector) $banned$ of size $n$, with $banned_i$ being the $i$th string. Now, read in each installed software $app$ as a string in a for-loop. \\\\
+For each string $app$, search the list $banned$ to see if it contains the string $app$. If any match is found, immediately break and print YES. If no match is found after searching all strings, the answer is NO.
+\\\\
+\textbf{Time Complexity: $O(nm)$}
+
+\section{Angry Robots}
+\textbf{Problem Idea: Taha Rawjani and Arush Bodla}
+\section{Skipping Stones}
+\textbf{Problem Idea: Taha Rawjani}
+\section{Ralph and Brian}
+\textbf{Problem Idea: Brian Tay}
+\section{Titration}
+\textbf{Problem Idea: Arush Bodla}
+\subsection{Walkthrough}
+The first idea is to just brute force. This doesnt work. Some more blab .... Prefix sums + binary search. This would .... + more reasoning for someone who had no idea how to start
+\subsection{Editorial}
+Use prefix sums and binary search to find the amount of acid/base left over in each beaker.
+\section{Field Day}
+\textbf{Problem Idea: Taha Rawjani}
+\section{Navigation}
+\textbf{Problem Idea: Taha Rawjani and Brian Tay}
+\newpage
+\section{Senior Research}
+\textbf{Problem Idea: Taha Rawjani\\Analysis By: Taha Rawjani}
+\subsection{Editorial}
+This problem deals with outputting the value of an associative function (multiplication) across many intervals $(l, r)$. Since $r \leq 2\cdot10^6$, it is possible to precompute the value of the function $\sigma(r)$ for all possible values of $r$. Let $pref_i = $ multiplication of $\sigma(x)$ for $2\leq x \leq i$. It is easy to see that the answer for any query $(l, r)$ can be given by $pref_r \cdot (pref_{l-1})^{-1}$. 
+\\\\
+To calculate this value modulo $MOD = 10^9 + 7$, use Fermat's little theorem to calculate the modular inverse for each value in $pref$, this can be done in $O(log(MOD))$ time with fast binary exponentiation.
+\\$(pref_{i})^{-1} = binpow(pref_{i}, MOD-2)$. 
+\\Therefore the answer for each query $(l, r)$ is $pref_r \cdot binpow(pref_{l-1}, MOD-2)$. 
+\\\\
+Now all that remains is an efficient way to calculate $\sigma(x)$ for each $x \leq 2\cdot10^6$. This can be done naively in $O(x\sqrt{x})$ due to the property that each number $x$ has divisors in pairs either above or below $\sqrt{x}$ making an upper bound on the number of divisors $2\cdot\sqrt{x}$. However, that is too slow given the constraints. Instead, notice how the function $\sigma(x)$ only depends on the prime factors, as $\sigma(x) = \prod_{i=1}^{k} \frac{p_i^{e_i+1} - 1}{p_i - 1}$ if $x = p_1^{e_1} p_2^{e_2} \dots p_k^{e_k}$. The prime factors inside the range $2 \leq p_i\leq 2\cdot10^6$ can be calculated using Sieve of Eratosthenes in $O(Nlog(log(N)))$, and then using the above formula, they can be used to find $\sigma(x)$ for all values in  in $O(N\sqrt{\frac{N}{ln(N)}})$ time.
+\\\\
+The above calculation for $\sigma(x)$ can be further optimized using a sieve-like algorithm. This works because the runtime is $N+\frac{N}{2}+\frac{N}{3}+\frac{N}{4}\dots$, bounded by the harmonic series to have a complexity of $O(Nln(N))$. While this is the intended solution, the time limit was increased to allow prime-based $O(N\sqrt{N})$ solutions to pass.
+\begin{lstlisting}
+for (int d = 1; d <= MAXN; ++d) {
+    for (int m = d; m <= MAXN; m += d) {
+        sigma[m] += d;
+        sigma[m] %= MOD;
+    }
+}
+\end{lstlisting}
+\section{Blue Ribbon}
+\textbf{Problem Idea: Taha Rawjani\\Analysis By: Taha Rawjani}
+\end{document}
