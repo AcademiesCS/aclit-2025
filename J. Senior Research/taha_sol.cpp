@@ -1,84 +1,41 @@
 #pragma GCC optimize("Ofast")
-#pragma GCC optimize("unroll-loops") 
 #include <bits/stdc++.h>
 
 using namespace std;
-
+typedef long long ll;
 #define endll '\n'
 
-long long SumOfDivisors(long long num, vector<long long>& primes) {
-    long long total = 1;
+const long long MAXN = 2e6 + 5;
+long long MOD = 1e9 + 7;
 
-    for (int i = 0; primes[i] * primes[i] <= num; i++) {
-        if (num % primes[i] == 0) {
-            int e = 0;
-            do {
-                e++;
-                num /= primes[i];
-            } while (num % primes[i] == 0);
-
-            long long sum = 0, pow = 1;
-            do {
-                sum += pow;
-                pow *= primes[i];
-            } while (e-- > 0);
-            total *= sum;
-        }
-    }
-    if (num > 1) {
-        total *= (1 + num);
-    }
-    return total;
-}
-
-void sieve(vector<bool>& is_prime, long long n)
+ll invMod(ll x) 
 {
-    is_prime[0] = is_prime[1] = false;
-    long long i = 2;
-    if (is_prime[i] && i * i <= n) {
-        for (long long j = i * i; j <= n; j += i)
-            is_prime[j] = false;
-    }
-
-    for (i = 3; i <= n; i++) {
-        if (is_prime[i] && i * i <= n) {
-            for (long long j = i * i; j <= n; j += i)
-                is_prime[j] = false;
-        }
-    }
+  if (x <= 1) {
+    return x;
+  }
+  return MOD - MOD / x * invMod(MOD % x) % MOD;
 }
 
-long long binExp(long long a, long long b, long long mod) {
-    if (b == 0)
-        return 1;
-
-    long long res = binExp(a, b / 2, mod) % mod;
-    if (b & 1) {
-        return (a * ((res * res) % mod)) % mod;
-    } else
-        return (res * res) % mod;
-}
+ll prefixes[MAXN + 1];
+ll sigma[MAXN + 1];
 
 void solveEfficient()
 {
     ios::sync_with_stdio(false);
     cin.tie(0); cout.tie(0);
-
-    long long MAXN = 2e6+1, MOD = 1e9 + 7;
-    vector<bool> is_prime(MAXN+692, true);
-    sieve(is_prime, MAXN+692);
-
-    vector<long long> primes{};
-    for(int i = 0; i < is_prime.size(); i++)
-    {
-        if(is_prime[i]) primes.push_back(i);
+    
+    for (int d = 1; d <= MAXN; ++d) {
+        for (int m = d; m <= MAXN; m += d) {
+            sigma[m] += d;
+            sigma[m] %= MOD;
+        }
     }
 
-    vector<long long> prefixes{1};
+    prefixes[0] = 1;
 
     for(long long i = 2; i <= MAXN; i++)
     {
-        prefixes.push_back(SumOfDivisors(i, primes));
+        prefixes[i-1] = sigma[i];
         prefixes[i-1] *= prefixes[i - 2];
         prefixes[i-1] %= MOD;
     }
@@ -87,7 +44,7 @@ void solveEfficient()
     while(T--)
     {
         long long l, r; cin >> l >> r;
-        cout << prefixes[r - 1] * binExp(prefixes[l - 2], MOD - 2, MOD) % MOD << endll;
+        cout << prefixes[r - 1] * invMod(prefixes[l - 2]) % MOD << endll;
     }
 }
 
