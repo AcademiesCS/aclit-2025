@@ -2,6 +2,10 @@
 \usepackage{graphicx} % Required for inserting images
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage[normalem]{ulem} % For underline
 
 \lstdefinestyle{javastyle}{
   language=Java,
@@ -16,8 +20,19 @@
   showstringspaces=false,
   tabsize=4,
   classoffset=1,
-  morekeywords={String},
-  keywordstyle=\color{teal}
+  morekeywords={String, System, Math},
+  keywordstyle=\color{teal},
+  literate=
+    *{0}{{{\color{purple}0}}}{1}
+    {1}{{{\color{purple}1}}}{1}
+    {2}{{{\color{purple}2}}}{1}
+    {3}{{{\color{purple}3}}}{1}
+    {4}{{{\color{purple}4}}}{1}
+    {5}{{{\color{purple}5}}}{1}
+    {6}{{{\color{purple}6}}}{1}
+    {7}{{{\color{purple}7}}}{1}
+    {8}{{{\color{purple}8}}}{1}
+    {9}{{{\color{purple}9}}}{1}
 }
 
 \lstset{style=javastyle}
@@ -26,20 +41,25 @@
 \renewcommand{\thesection}{\Alph{section}.}
 \renewcommand{\thesubsection}{\roman{subsection}}
 
+
+\newcommand{\link}[1]{\textcolor{blue!50!black}{\uline{\url{#1}}}}
+\newcommand{\namelink}[2]{\textcolor{blue!50!black}{\uline{\href{#1}{#2}}}}
+
+
 \setcounter{tocdepth}{1}
 
 \title{ACL-IT 2025 Editorial}
-\author{} % Add author if needed
-\date{2025}
+\author{Taha Rawjani, Arush Bodla} % Add author if needed
+\date{Spring 2025}
 
 \graphicspath{{./}} % Ensure the image is in the same folder as .tex
 
 \begin{document}
 \maketitle
 \begin{center}
-    \vfill
-    \includegraphics[width=1.0\textwidth]{logo.png}
-    \vfill
+	\vfill
+	\includegraphics[width=1.0\textwidth]{logo.png}
+	\vfill
 \end{center}
 
 \newpage
@@ -50,78 +70,293 @@
 
 \section*{Introduction}
 All solutions to problems will be posted to GitHub, along with full code in Java and C++. The code here is only snippets of it to illustrate the problem-solving process. There's a short solution and an in-depth one for the harder problems. Please let us know if you have questions about anything mentioned here.
-
+\newpage
 \section{First Day}
 \textbf{Problem Idea: Matthew Li\\ Analysis By: Arush Bodla}
 \subsection{Editorial}
 The problem asks us to output a greeting given the name of someone Ralph is going to greet. The easiest way to do this is to use string concatenation. Read in the name, then print out the combined string with the rest of the greeting. Alternatively, print out sections of the greeting one by one.
-
 \begin{lstlisting}
-    String name = sc.next();
-    System.out.println("Hello " + name + " I'm Ralph!");
-    int x = 4;
+String name = sc.next();
+System.out.println("Hello " + name + " I'm Ralph!");
 \end{lstlisting}
-
-
+\textbf{Time Complexity: $\mathcal{O}(1)$}\\
+\textbf{Code: \link{https://github.com/2900xt/aclit-2025/tree/main/A_First_Day}}
+\subsection{Additional Reading}
+\begin{enumerate}
+    \item \namelink{https://www.programiz.com/java-programming/basic-input-output}{Input and output in Java}
+    \item \namelink{https://www.geeksforgeeks.org/basic-input-output-c/}{Input and output in C++}
+\end{enumerate}
+\newpage
 \section{Tardy}
 \textbf{Problem Idea: Matthew Li\\ Analysis By: Arush Bodla}
 \subsection{Editorial}
-Count the number of times Ralph is going to be late. Compare each value of $q_i$ to the value of $k$, and increment a tardy counter if Ralph will be late that quarter. Then, if the counter is greater than or equal to two, Ralph has been tardy too many times and will get detention. Alternatively, use an array and a loop to count.
+Count the number of times Ralph is going to be late. Compare each value of $q_i$ to the value of $k$, and increment a tardy counter if Ralph will be late that quarter. Then, if the counter is greater than or equal to two, Ralph has been tardy too many times and will get detention. Alternatively, use an array and a loop to count. 
 
 \begin{lstlisting}
-    int numTardy = 0;
-    if(q1 > k) numTardy++;
-    if(q2 > k) numTardy++;
-    ...
-    if(k >= 2) System.out.println("YES");
-    else System.out.println("NO");
+int numTardy = 0;
+if(q1 > k) numTardy++;
+if(q2 > k) numTardy++;
+...
+if(k >= 2) System.out.println("YES");
+else System.out.println("NO");
 \end{lstlisting}
-
+\textbf{Time Complexity: $\mathcal{O}(1)$}\\
+\textbf{Code: \link{https://github.com/2900xt/aclit-2025/tree/main/B_Tardy}}
+\subsection{Additional Reading}
+\begin{enumerate}
+    \item \namelink{https://codelearn.com/blog/conditionals-loops-variables-and-functions/}{Conditionals and variables}
+\end{enumerate}
+\newpage
 \section{Laptops}
 \textbf{Problem Idea: Taha Rawjani\\ Analysis By: Taha Rawjani}
 \subsection{Editorial}
-Read the list of banned software into a list (or ArrayList/std::vector) $banned$ of size $n$, with $banned_i$ being the $i$th string. Now, read in each installed software $app$ as a string in a for-loop. \\\\
+Read the banned softwares into a list $banned$ of size $n$, with $banned[i]$ being the $i$th banned software. Now, read in each installed software $app$ as a string in a for-loop. \\\\
 For each string $app$, search the list $banned$ to see if it contains the string $app$. If any match is found, immediately break and print YES. If no match is found after searching all strings, the answer is NO.
-\\\\
-\textbf{Time Complexity: $O(nm)$}
-
+\begin{lstlisting}
+String[] bannedSoftware = ....
+for(int i = 0; i < m; i++){
+    String currentApp = sc.next();
+    for(String b : bannedSoftware){
+        if(currentApp.equals(b)){
+            System.out.println("YES");
+            return;
+        }
+    }
+}
+System.out.println("NO");
+\end{lstlisting}
+\textbf{Time Complexity: $\mathcal{O}(nm)$}\\
+\textbf{Code: \link{https://github.com/2900xt/aclit-2025/tree/main/C_Laptops}}
+\subsection{Additional Reading}
+\begin{enumerate}
+    \item \namelink{https://www.geeksforgeeks.org/java-for-loop-with-examples/}{For loops}
+    \item \namelink{https://www.geeksforgeeks.org/compare-two-strings-in-java/}{String comparisons in Java}
+\end{enumerate}
+\newpage
 \section{Angry Robots}
-\textbf{Problem Idea: Taha Rawjani and Arush Bodla}
+\textbf{Problem Idea: Taha Rawjani and Arush Bodla\\Analysis By: Arush Bodla}
+\subsection{Editorial}
+This problem is pretty common in introductory physics. We're given some equations, and need to find out how to extract $x_f$ and $y_f$ from it. These are the equations that were given:
+\begin{itemize}
+	\item $x_f = x_i+ v_xt$
+	\item $v_{yf} = v_{yi} + a_yt$
+	\item $y_f = y_i + v_{yi}t + \frac{1}{2}a_yt^2$
+	\item $a_y = -g$
+\end{itemize}
+We can see that the first and third equations are the ones that we need to analyze, as they have the desired final position in them. From the picture, we can get two more equations:
+\begin{itemize}
+	\item $v_x=v_i\cos \theta$
+	\item $v_y = v_i\sin \theta$
+\end{itemize}
+Now we can get the full equation for $x_f$:\\
+$x_f = x_i+v_i\cdot t\cdot\cos \theta $\\
+The process for $y_f$ is a little more complicated. We can see that the second equation is not important, as the equation for $y_f$ given doesn't need $v_{yf}$. We're given that $a_y=-g$, so we can substitute it in.
+$y_f=y_i+v_{yi}-\frac{1}{2}gt^2$.
+Just like with the $x$ equation, we can sub in $v_{yi}=v_i\sin \theta$.
+The final equation is this:\\
+$y_f=y_i+t\cdot v_i\cdot\sin\theta\ - \frac{1}{2}gt^2$.\\
+The code just needs to calculate these formulas and output the result.
+\begin{lstlisting}
+double vi, theta, xi, yi, t;
+double g = 9.80665;
+double xf = xi + t * Math.cos(Math.toRadians(theta));
+double yf = yi + t * Math.sin(Math.toRadians(theta)) - 0.5 * t * t * g
+System.out.println(xf + " " + yf);
+\end{lstlisting}
+\textbf{Time Complexity: $\mathcal{O}(1)$}\\
+\textbf{Code: \link{https://github.com/2900xt/aclit-2025/tree/main/D_Angry_Robots}}
+\subsection{Additional Reading}
+\begin{enumerate}
+    \item \namelink{https://phys.libretexts.org/@go/page/14447}{Projectile motion}
+    \item \namelink{https://jenkov.com/tutorials/java/math-operators-and-math-class.html}{Math in Java}
+    \item \namelink{https://www.udacity.com/blog/2021/07/cpp-math-explained.html}{Math in C++}
+\end{enumerate}
+\newpage
 \section{Skipping Stones}
-\textbf{Problem Idea: Taha Rawjani}
-\section{Ralph and Brian}
-\textbf{Problem Idea: Brian Tay}
+\textbf{Problem Idea: Taha Rawjani\\Analysis By: Taha Rawjani}
+\subsection{Editorial}
+Let's say that the first stone is shot at position $i$. This means that all the ducks at $i$, $i+m$, $i+2m$, \dots will be hit. The first observation is that all of the optimal places to throw the stone are in the range $0 \leq x < m$. Why is this the case? Let's say we throw a stone at some position $A > m$. If we launch a stone at $A - m$, we would still hit $A$, getting up to 2 ducks for the same shot instead of 1.
+\\\\
+So now, the problem is to find out which $x$ positions in the range $[0,\ m]$ have the most optimal number of ducks hit. How do we calculate the amount of stones a duck gets hit by? If a stone is shot at a position $i < m$, then it will only hit the positions $p$ where $p = i +k\cdot m$, where $k\geq 0$. From this, we get that $p-i$ is divisible by $m$, or the remainder when $p$ is divided by $m$ must equal $i$. The remainder can be calculated for each duck position $d_i$ by using the modulus operator in your language ($\%$ in C++/Java/Python). 
+\\\\
+So, the final solution is as follows: Count the number of ducks that can be hit by launching a stone at each position $i$. Let's denote this $cnt[i]$. For each duck, we can find which $i$ it corresponds to by finding $d\bmod m$. Then, we can increment the corresponding position using $cnt[d \% m]$ for each duck. This array takes $\mathcal{O}(n)$ to calculate. To find the $x$ best points to shoot, sort the array in descending order, and add the $cnt[i]$ for $0\leq i\leq min(m, x)$ (either we hit the x best positions, or all m if we have enough shots).
+\begin{lstlisting}
+int[] count = new int[m];
+for(int i = 0; i < N; i++) {
+    int duck = sc.nextInt();
+    count[duck % M]++;
+}
+
+Arrays.sort(count, Collections.reverseOrder());
+ll ans = 0;
+
+for(int i = 0; i < min(X, M); i++) {
+    ans += count[i];
+}
+\end{lstlisting}
+\textbf{Time Complexity: $\mathcal{O}(n+m\log m+x)$}\\
+\textbf{Code: \link{https://github.com/2900xt/aclit-2025/tree/main/E_Skipping_Stones}}
+\subsection{Additional Reading}
+\begin{enumerate}
+    \item \namelink{https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/what-is-modular-arithmetic}{Modular arithmetic}
+    \item \namelink{https://www.geeksforgeeks.org/introduction-to-sorting-algorithm/}{Sorting}
+    \item \namelink{https://usaco.guide/silver/greedy-sorting}{Practice with greedy algorithms and sorting}
+\end{enumerate}
+\newpage
+
+
 \section{Titration}
 \textbf{Problem Idea: Arush Bodla}
-\subsection{Walkthrough}
-The first idea is to just brute force. This doesnt work. Some more blab .... Prefix sums + binary search. This would .... + more reasoning for someone who had no idea how to start
+\textbf{Analysis By: Arush Bodla}
 \subsection{Editorial}
-Use prefix sums and binary search to find the amount of acid/base left over in each beaker.
+First, let's try just adding drops one at a time. We can simulate the titration process, and then stop when the base level is less than 0. Then, undo the last drop and see if there is an improvement. This results in an $\mathcal{O}(qn)$ solution, which is too slow.\\\\
+To optimize this, we can the base level in the beaker only ever goes down. This is because every $a_i$ is greater than 0, which means some amount of base must be neutralized every drop. Let's imagine that we could somehow test for some $t$, the result when $a_1,a_2...a_t$ are all added to the beaker at the same time. We can see that the new amount of base that would be left over is $b-(a_1+a_2...a_t)=b-\sum_k^ta_k$. Now we need to find the first $t$ that makes that sum less than or equal to zero. We can accomplish this through binary search: if $b-\sum_k^ta_k$ is negative, make $t$ lower, otherwise make $t$ higher. If at any point we find that the beaker becomes neutral, we can break early and print 0.\\\\
+However, you might have noticed that calculating $\sum_k^ta_k$ takes $\mathcal{O}(t)$ time. This means the total complexity of a solution like this would be $\mathcal{O}(n+qn\log n)$, which is too slow. In order to optimize this, we can use prefix sums: each value of the array $pref[i]$ is equal to $\sum_k^ia_k$. Then, we can generate $pref$ like this:
+\begin{itemize}
+    \item $pref[0] = 0$
+    \item $pref[i+1] = pref[i]+a[i]$, for $0\leq i<n-1$
+\end{itemize}
+Why does this work? Imagine you already have the first 5 drops of acid in, and you know how much total acid has been added. To get the total for 6 drops, you can just add the 6th drop to the existing total. Note that you must use 64 bit integers in $pref$ to prevent overflow. This is the primary idea behind the sum array. Now, you can query $\sum_k^ta_k$ in $\mathcal{O}(1)$ rather than in $\mathcal{O}(t)$. The full solution is now to binary search on the first value of $t$ such that $pref[t] \geq b_i$ for each query.
+\begin{lstlisting}
+    int binarysearch(long[] pref, long bi){
+        int low = 0, high = pref.length - 1;
+        while(low < high){
+            int mid = (low + high) / 2;
+            //mid is the value of t being tested
+            if(pref[mid] == bi){
+                return mid;
+            }
+            else if(pref[mid] > bi){
+                high = mid - 1;
+            }
+            else{
+                low = mid + 1;
+            }
+        }
+        return low;
+    }
+\end{lstlisting}
+\textbf{Time Complexity: $\mathcal{O}(n + q\log n)$}\\
+\textbf{Code: \link{https://github.com/2900xt/aclit-2025/tree/main/F_Titration}}
+\subsection{Additional Reading}
+\begin{enumerate}
+    \item \namelink{https://usaco.guide/silver/prefix-sums}{Prefix sums}
+    \item \namelink{https://usaco.guide/silver/binary-search}{Binary search}
+\end{enumerate}
+\newpage
+
+
+\section{Ralph and Brian}
+\textbf{Problem Idea: Brian Tay}\\
+\textbf{Analysis By: Arush Bodla}\\
+The first observation for solving this problem is that you should always take the cheapest bottle at every step. This will allow Ralph to get the most amount of soda for his money. To keep track of the price of each soda, let's initialize an array $cost$ where $cost[i]$ is the current price of soda $i$. When we first read in all the input, $cost[i] = a_i$ since that's the starting price for the soda. We also need to keep track of the number of bottles of that soda, where $count[i] = b_i$. Third, we can read in $d$ as is.\\\\
+When we buy a bottle of soda $i$, two things need to happen: $count[i]$ needs to decrease by 1, and $cost[i]$ increases by $d[i]$. So here's the basic idea so far: 
+\begin{itemize}
+    \item initialize $money$, $bottles$ as the money spent and bottles bought
+    \item while you can afford the next bottle:
+    \item find the next bottle, and buy it
+    \item update $cost[i]$ and $count[i]$, and add the money to the total
+\end{itemize}
+So now we need to find a way to get the cheapest bottle to get. The first solution that comes to mind is loop over all $i$, keeping track of the lowest $cost[i]$ seen across the array. This results in $\mathcal{O}(n)$ per bottle. The worst case scenario for the number of bottles is $\mathcal{O}(\sqrt{x})$, which means the solution is $\mathcal{O}(n\sqrt{x})$ (too slow).
+\subsection{Editorial}
+\textbf{Time Complexity: $\mathcal{O}(1)$}\\
+\textbf{Code: \link{https://github.com/2900xt/aclit-2025/tree/main/G_Ralph_and_Brian}}
+\subsection{Additional Reading}
+\newpage
 \section{Field Day}
 \textbf{Problem Idea: Taha Rawjani}
+\subsection{Editorial}
+\textbf{Time Complexity: $\mathcal{O}(1)$}\\
+\textbf{Code: \link{https://github.com/2900xt/aclit-2025/tree/main/H_Field_Day}}
+\subsection{Additional Reading}
+\newpage
 \section{Navigation}
-\textbf{Problem Idea: Taha Rawjani and Brian Tay}
+\textbf{Problem Idea: Taha Rawjani and Brian Tay\\Analysis By: Taha Rawjani}
+\subsection{Editorial (Easy Version)}
+The first observation is that the layout of the classrooms and the hallways connecting them must form a tree since it is guaranteed all classrooms are connected, and there are N-1 hallways. Thus, the problem can be reduced to finding the length of the longest path in a tree (Tree Diameter). The trivial solution is $O(n^2)$ and involves doing a depth-first search from each room (node) in the tree to find the distance between itself and every other node. The answer would just be the maximum of all pairwise distances. To perform this algorithm, the input should be read into an adjacency list.
+\\\\A depth-first search is a version of recursive backtracking where you start at a node $u$, and keep recursively visiting the first unvisited child of the current node. After running into a dead-end, the algorithm backtracks and visits the second unvisited child, etc. To solve the problem with this method, use a DFS that keeps track of the current node $u$, the distance from the source $dist$, and a list of booleans $vis$ that keep track if we have visited each node.
+\begin{lstlisting}
+void dfs(int u, int dist) {
+    vis[u] = true;
+    farthest = max(farthest, dist);
+    for(int v : adj[u]) 
+        if(!vis[v]) dfs(v, dist+1); 
+}
+\end{lstlisting}
+However, this would TLE due to $n \leq 10^5$. The second observation is that when doing a DFS from any node in the tree, the farthest point $v$ will always be one of the endpoints of the diameter of the tree. So instead of doing a DFS from each possible endpoint of the diameter, just do a DFS from a random node (1), and record the farthest point $v$. Then, do another DFS from $v$ to find the farthest point from $v$, $x$. The answer is the distance between $v$ and $x$. Since only two DFSs are used in this algorithm, the time complexity is $\mathcal{O}(n)$
+\\\\
+\textbf{Time Complexity: $\mathcal{O}(n)$}\\
+\textbf{Code: \link{https://github.com/2900xt/aclit-2025/tree/main/I_Navigation}}
+\newpage
+\subsection{Editorial (Hard Version)}
+To solve the harder version of the problem, we need to find a path that goes through all $k$ of Ralph's classes. Since the basement represents a tree graph, there must be exactly ONE simple path (i.e. it does not branch) that connects all of Ralph's classes. The first observation is that all of Ralph's classes must be collinear. This means that if we find the `diameter' (longest path) between just the subset of $k$ vertices on the graph, all of the $k$ classes must be located on that diameter. In other words, the singular path between all the $k$ classes must exist without any offshoots or branches. If this path doesn't exist, then the answer doesn't exist!
+\\\\
+Now, how do we verify that this path exists? Let us denote one endpoint of the path as $a$, and the other endpoint as $b$. Also, denote $d(u, v)$ as the distance between nodes $u$ and $v$ in the tree. In particular, if we choose two vertices $a$ and $b$ in $k$ that are as far apart as possible, $d(a,b)$ must equal $d(a,v)\ +\ d(v,b)$ for all $v$ in $k$. $a$ and $b$ can be found using a modification of the tree-diameter approach in problem I1.
+\\\\
+Outside of the K rooms, Ralph can extend his path out of each endpoint $a$ and $b$ found previously. So for node $a$, remove the first edge on the path that connects it to node $b$, and then do another DFS to find the maximum length that a path can be before going into $a$ (the maximum distance between any leaf and $a$. Let's call this value $ext_a$. Do this process for node $b$, and call the length of the extension $ext_b$.\\\\
+Now, the answer is just $dist(a,\ b)\ +\ ext_a\ +\ ext_b$
+\begin{lstlisting}
+adjList[A].erase(find(adjList[A].begin(), adjList[A].end(), e1));
+adjList[B].erase(find(adjList[B].begin(), adjList[B].end(), e2));
+int extA = 0, extB = 0;
+ 
+dist = vector<int>(N, -1);
+dfsFind(A, 0);
+extA = *max_element(dist.begin(), dist.end());
+ 
+dist = vector<int>(N, -1);
+dfsFind(B, 0);
+extB = *max_element(dist.begin(), dist.end());
+\end{lstlisting}
+\textbf{Time Complexity: $\mathcal{O}(n)$}\\
+\textbf{Code: \link{https://github.com/2900xt/aclit-2025/tree/main/I_Navigation}}
+\subsection{Additional Reading}
 \newpage
 \section{Senior Research}
 \textbf{Problem Idea: Taha Rawjani\\Analysis By: Taha Rawjani}
 \subsection{Editorial}
-This problem deals with outputting the value of an associative function (multiplication) across many intervals $(l, r)$. Since $r \leq 2\cdot10^6$, it is possible to precompute the value of the function $\sigma(r)$ for all possible values of $r$. Let $pref_i = $ multiplication of $\sigma(x)$ for $2\leq x \leq i$. It is easy to see that the answer for any query $(l, r)$ can be given by $pref_r \cdot (pref_{l-1})^{-1}$. 
+This problem deals with outputting the value of an associative function (multiplication) across many intervals $(l, r)$. Since $r \leq 2\cdot10^6$, an $\mathcal{O}(r)$ solution is feasible. We can precompute the value of $\sigma(i)$ for all possible values of $i$ and store these values in an array $s$. We can use the idea of prefix sums to make it easy to compute the product of the value across the intervals. Let $pref[i] = \sigma(2) \cdot \sigma(3)\ ...\ \sigma(i)$, or the product of $\sigma(x)$ for $2\leq x \leq i$. We can get the answer to a given range $(l, r)$ if we take the answer for the range $(1, r)$ and remove the result from $(1, l - 1)$. This leaves the considered range $(l, r)$. To remove the lower range, we can "divide" by the answer for $(1, l - 1)$, or take the modular inverse. From this, the answer to any query can be given by $pref[r] \cdot (pref[l-1])^{-1}$. 
 \\\\
-To calculate this value modulo $MOD = 10^9 + 7$, use Fermat's little theorem to calculate the modular inverse for each value in $pref$, this can be done in $O(log(MOD))$ time with fast binary exponentiation.
-\\$(pref_{i})^{-1} = binpow(pref_{i}, MOD-2)$. 
-\\Therefore the answer for each query $(l, r)$ is $pref_r \cdot binpow(pref_{l-1}, MOD-2)$. 
+To calculate the modular inverse for a value modulo $MOD = 10^9 + 7$, we can use Fermat's little theorem. The inverse of $x$ is given by $x^{MOD-2}$. Using binary exponentiation, the time complexity is $\mathcal{O}(log(MOD))$ time.
+\\
+\\The final answer for each query is therefore $pref[r] \cdot binpow(pref[l-1], 10^9+5)$. 
 \\\\
-Now all that remains is an efficient way to calculate $\sigma(x)$ for each $x \leq 2\cdot10^6$. This can be done naively in $O(x\sqrt{x})$ due to the property that each number $x$ has divisors in pairs either above or below $\sqrt{x}$ making an upper bound on the number of divisors $2\cdot\sqrt{x}$. However, that is too slow given the constraints. Instead, notice how the function $\sigma(x)$ only depends on the prime factors, as $\sigma(x) = \prod_{i=1}^{k} \frac{p_i^{e_i+1} - 1}{p_i - 1}$ if $x = p_1^{e_1} p_2^{e_2} \dots p_k^{e_k}$. The prime factors inside the range $2 \leq p_i\leq 2\cdot10^6$ can be calculated using Sieve of Eratosthenes in $O(Nlog(log(N)))$, and then using the above formula, they can be used to find $\sigma(x)$ for all values in  in $O(N\sqrt{\frac{N}{ln(N)}})$ time.
+Now we need an efficient way to calculate $\sigma(x)$ for each $x \leq 2\cdot10^6$. This can be done naively in $\mathcal{O}(x\sqrt{x})$ by brute forcing every factor of $x$ up to $\sqrt{x}$ (factors larger than this will have a pair with a factor less than $\sqrt{x}$). The upper bound on the number of factors is $2\cdot\sqrt{x}$. However, that is too slow given the constraints. Instead, we can use another version of $\sigma(x)$ that relies on $x$'s prime factorization. This alternate form is $\sigma(x) = \prod_{i=1}^{k} \frac{p_i^{e_i+1} - 1}{p_i - 1}$ if $x = p_1^{e_1} p_2^{e_2} \dots p_k^{e_k}$ $\href{https://cp-algorithms.com/algebra/divisors.html}{(see\ more)}$. The prime factors inside the range $2 \leq p_i\leq 2\cdot10^6$ can be calculated using the Sieve of Eratosthenes in $\mathcal{O}(N\log\log N)$, and then using the above formula, they can be used to find $\sigma(x)$ for all values in  in $\mathcal{O}(N\sqrt{\frac{N}{\ln N}})$ time. 
 \\\\
-The above calculation for $\sigma(x)$ can be further optimized using a sieve-like algorithm. This works because the runtime is $N+\frac{N}{2}+\frac{N}{3}+\frac{N}{4}\dots$, bounded by the harmonic series to have a complexity of $O(Nln(N))$. While this is the intended solution, the time limit was increased to allow prime-based $O(N\sqrt{N})$ solutions to pass.
+The above calculation for $\sigma(x)$ can be further optimized using a sieve-like algorithm that loops over divisors. This works because the runtime is $N+\frac{N}{2}+\frac{N}{3}+\frac{N}{4}\dots$, bounded by the harmonic series to have a complexity of $\mathcal{O}(N\ln N)$. While this is the intended solution, the time limit was increased to allow prime-based $\mathcal{O}(N\sqrt{N})$ solutions to pass. 
 \begin{lstlisting}
-for (int d = 1; d <= MAXN; ++d) {
-    for (int m = d; m <= MAXN; m += d) {
-        sigma[m] += d;
-        sigma[m] %= MOD;
-    }
-}
+for (int d = 1; d <= MAXN; ++d) 
+    for (int m = d; m <= MAXN; m += d) 
+        sigma[m] = (sigma[m] + d) % MOD;
 \end{lstlisting}
+\textbf{Time Complexity: $\mathcal{O}(1)$}\\
+\textbf{Code: \link{https://github.com/2900xt/aclit-2025/tree/main/J_Senior_Research}}
+\subsection{Additional Reading}
 \section{Blue Ribbon}
 \textbf{Problem Idea: Taha Rawjani\\Analysis By: Taha Rawjani}
+\subsection{Editorial}
+
+The brute force approach of enumerating subsets takes $\mathcal{O}(q\cdot2^n)$ or $\mathcal{O}(2^n + q)$ depending on implementation. Both of these ideas will TLE.
+\\\\
+The problem should be modeled like a \href{https://usaco.guide/gold/knapsack}{knapsack DP problem}. Let $dp[i][s][x][c]$ be the number of ways to get a subset using the first $i$ elements to have a sum of $s$, a xor of $x$, and have $c$ elements. To calculate this DP table, iterate over all elements of the set in order, then we have 2 cases.
+\begin{enumerate}
+	\item We don't include item $i$: $dp[i+1][s][x][c] \mathrel{+}= dp[i][s][x][c]$ 
+	\item We include item $i$: $dp[i+1][s][x][c] \mathrel{+}= dp[i][s-a_i][x \oplus a_i][c-1]$
+\end{enumerate}
+
+This DP has $n\cdot100\cdot256\cdot n$ states, around $4\cdot10^7$, which will fit in the time limit as the transitions are $\mathcal{O}(1)$. This yields a time complexity of $\mathcal{O}(n^2sx)$ where $s$ is the max sum and $x$ is the max XOR sum. To prevent a memory/time limit exceeded verdict, this DP array can be condensed into a size of $2\cdot100\cdot256\cdot40$ and pre-allocated in a global variable.
+\\\\
+Now, let's handle the queries. The first way to approach these queries is to use brute force to loop over the DP states (A\dots B), (C\dots D), and (E\dots F) and count up, leading to a complexity of $\mathcal{O}(nxs)$ for each query, which will TLE. The trivial way to optimize this is to use prefix sums on 2 dimensions, simplifying each query into a 1D sweep across $A \leq i \leq B$, and then for each $i$ add up the prefix sum for the subrectangle (C\dots D), and (E\dots F). This yields a time complexity of $\mathcal{O}(n)$ for each query, which fits in the time limit.
+\begin{lstlisting}
+long long cur = dp[s][x][k];
+if(s > 0) cur += prefix[k][s - 1][x];
+if(x > 0) cur += prefix[k][s][x - 1];
+if(s > 0 && x > 0) cur -= prefix[k][s - 1][x - 1];
+prefix[k][s][x] = cur;
+\end{lstlisting}
+This can also be reduced to $\mathcal{O}(1)$ per query using cubic prefix sums and the principle of inclusion-exclusion, but that was not deemed necessary to solve this problem.
+\\\\
+\textbf{Time Complexity: $\mathcal{O}(n^2sx + qn)$}\\
+\textbf{Code: \link{https://github.com/2900xt/aclit-2025/tree/main/K_Blue_ribbon}} 
+\subsection{Additional Reading}
 \end{document}
